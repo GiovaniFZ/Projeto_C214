@@ -1,11 +1,22 @@
 import { Button, Fab, TextField } from '@mui/material'
 import './styles.css'
 import { useState } from 'react'
-export default function Home() {
+import { OrdersRespository } from '../../OrdersRepository';
+import { Order } from '../../types/Order';
+import { v4 as uuidv4 } from 'uuid';
 
+
+type Props = {
+    ordersRepository: OrdersRespository;
+  };
+
+export default function Home({ordersRepository}: Props) {
     const [addOrder, setAddOrder] = useState(false);
+    const [order, setOrder] = useState<Order>({} as Order)
 
     function handleAddOrder(){
+        const id = uuidv4();
+        ordersRepository.add({...order, id})
         setAddOrder(false);
     }
 
