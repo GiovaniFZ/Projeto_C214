@@ -1,5 +1,6 @@
 export type Order = {
     id: string;
-    table: string;
+    table: number;
     target: string;
+    quantity: number;
 }

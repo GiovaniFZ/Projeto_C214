@@ -12,17 +12,19 @@ type Props = {
 
 export default function Home({ordersRepository}: Props) {
     const [addOrder, setAddOrder] = useState(false);
-    const [table, setTable] = useState('');
+    const [table, setTable] = useState(0);
     const [target, setTarget] = useState('');
+    const [quantity, setQuantity] = useState(0);
     const [order, setOrder] = useState<Order>({} as Order)
 
     function handleAddOrder(){
         setOrder(order);
         const id = uuidv4();
-        const data = {
+        const data:Order = {
             id,
             table,
-            target
+            target,
+            quantity
         }
         ordersRepository.add({...order, ...data})
         setAddOrder(false);
@@ -31,7 +33,7 @@ export default function Home({ordersRepository}: Props) {
     return (
         <>
             <header>
-                <h1>Gerenciador de pedidos</h1>
+            <h1>Gerenciador de pedidos</h1>
             </header>
             <p>Pedidos</p>
             <Fab 
@@ -46,7 +48,7 @@ export default function Home({ordersRepository}: Props) {
                 <TextField 
                 value={table}
                 type='number'
-                onChange={(e) => setTable(e.target.value)} 
+                onChange={(e) => setTable(parseInt(e.target.value))} 
                 id="outlined-basic" 
                 label="Numero da mesa" 
                 variant="outlined" 
@@ -58,6 +60,14 @@ export default function Home({ordersRepository}: Props) {
                 variant="outlined" 
                 onChange={(e) => setTarget(e.target.value)}
                 />
+                <TextField 
+                value={quantity} 
+                id="outlined-basic" 
+                label="Quantidade" 
+                type="number"
+                variant="outlined" 
+                onChange={(e) => setQuantity(parseInt(e.target.value))}
+                />
                 <Button onClick={() => handleAddOrder()}>Adicionar</Button>
             </div>
             }
@@ -67,6 +77,7 @@ export default function Home({ordersRepository}: Props) {
                     <div>
                         <p>Mesa: {order.table}</p>
                         <p>Pedido: {order.target}</p>
+                        <p>Quantidade: {order.quantity}</p>
                     </div>
 
                 )
