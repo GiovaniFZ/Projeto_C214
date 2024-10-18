@@ -20,9 +20,8 @@ export class LocalStorageAdapter implements OrdersRespository {
         localStorage.setItem('orders', JSON.stringify(orders))
     }
     removeOrder(id: string): void {
-        const orders: Order[] = this.getOrder()
-        const index = orders.findIndex((item) => item.id === id);
-        orders.splice(index, 1)
-        localStorage.setItem('orders', JSON.stringify(orders))
+        const orders = this.getOrder();
+        const filteredOrders = orders.filter(order => order.id !== id); // Filtra apenas os pedidos com ID diferente
+        localStorage.setItem('orders', JSON.stringify(filteredOrders)); // Atualiza o localStorage
     }
 }
