@@ -1,5 +1,5 @@
 import { OrdersRespository } from "./OrdersRepository";
-import { Order } from "./types/Order";
+import { Order } from "./types/order";
 
 export class LocalStorageAdapter implements OrdersRespository {
     add(order: Order): void {
