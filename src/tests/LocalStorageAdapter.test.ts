@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'; // Importações do Vitest
-import { LocalStorageAdapter } from './LocalStorageAdapter';
-import { Order } from './types/order';
+import { LocalStorageAdapter } from '../LocalStorageAdapter';
+import { Order } from '../types/order';
 
 // Mock do localStorage
 const localStorageMock = (() => {
