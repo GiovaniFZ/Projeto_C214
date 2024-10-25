@@ -1,3 +1,6 @@
+:root{
+    --gray-100: #eeeeee
+}
 h1, p{
     font-family: Roboto, sans-serif;
 }
