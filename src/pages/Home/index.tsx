@@ -1,4 +1,4 @@
-import { Button, Fab, Table, TextField } from '@mui/material'
+import { Button, Fab, TextField } from '@mui/material'
 import './styles.css'
 import { useState } from 'react'
 import { OrdersRespository } from '../../OrdersRepository';
@@ -44,7 +44,7 @@ export default function Home({ ordersRepository }: Props) {
                 <Add />
             </Fab>
             {addOrder &&
-                <div>
+                <div className='addSection'>
                     <TextField
                         value={table}
                         type='number'
@@ -68,7 +68,7 @@ export default function Home({ ordersRepository }: Props) {
                         variant="outlined"
                         onChange={(e) => setQuantity(parseInt(e.target.value))}
                     />
-                    <Button onClick={() => handleAddOrder()}>Adicionar</Button>
+                    <Button variant='contained' onClick={() => handleAddOrder()}>Adicionar</Button>
                 </div>
             }
             <h1>Pedidos já feitos</h1>
