@@ -2,15 +2,6 @@
     text-align: center;
 }
 
-.curentOrders{
-    display: grid;
-    background-color: var(--gray-100);
-    border-radius: 5px;
-    grid-template-columns: repeat(3, 0.13fr);
-    justify-content: center;
-    align-items: center;
-}
-
 .orderBox{
     margin-top: 10px;
     margin-bottom: 10px;

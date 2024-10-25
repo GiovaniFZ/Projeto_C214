@@ -1,4 +1,4 @@
-import { Button, Fab, TextField } from '@mui/material'
+import { Button, Fab, Grid, Grid2, TextField } from '@mui/material'
 import './styles.css'
 import { useState } from 'react'
 import { OrdersRespository } from '../../OrdersRepository';
@@ -29,6 +29,13 @@ export default function Home({ ordersRepository }: Props) {
         }
         ordersRepository.add({ ...order, ...data })
         setAddOrder(false);
+    }
+
+    const gridProps = {
+        justifyContent: 'center',
+        alignItens: 'center',
+        backgroundColor: 'var(--gray-100)',
+        borderRadius: '5px',
     }
 
     return (
@@ -72,7 +79,7 @@ export default function Home({ ordersRepository }: Props) {
                 </div>
             }
             <h1>Pedidos já feitos</h1>
-            <div className='curentOrders'>
+            <Grid2 {...gridProps} spacing={2} container >
             {ordersRepository.getOrder().map((order) => {
                 return (
                     <div className='orderBox'>
@@ -84,7 +91,7 @@ export default function Home({ ordersRepository }: Props) {
                 )
             })
             }
-            </div>
+            </Grid2>
         </div>
     )
 }
