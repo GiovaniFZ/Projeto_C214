@@ -1,9 +1,10 @@
-import { Button, Fab, TextField } from '@mui/material'
+import { Button, Fab, Table, TextField } from '@mui/material'
 import './styles.css'
 import { useState } from 'react'
 import { OrdersRespository } from '../../OrdersRepository';
 import { Order } from '../../types/order';
 import { v4 as uuidv4 } from 'uuid';
+import { Add, Delete, Fastfood, ShoppingCart, TableRestaurant } from '@mui/icons-material';
 
 
 type Props = {
@@ -40,7 +41,7 @@ export default function Home({ ordersRepository }: Props) {
                 aria-label="add"
                 onClick={() => setAddOrder(true)}
             >
-                +
+                <Add />
             </Fab>
             {addOrder &&
                 <div>
@@ -75,9 +76,10 @@ export default function Home({ ordersRepository }: Props) {
             {ordersRepository.getOrder().map((order) => {
                 return (
                     <div className='orderBox'>
-                        <p>Mesa: {order.table}</p>
-                        <p>Pedido: {order.target}</p>
-                        <p>Quantidade: {order.quantity}</p>
+                        <p><TableRestaurant /> M: {order.table}</p>
+                        <p><Fastfood /> P: {order.target}</p>
+                        <p><ShoppingCart /> Q: {order.quantity}</p>
+                        <Fab><Delete /></Fab>
                     </div>
                 )
             })
