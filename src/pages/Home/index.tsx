@@ -1,4 +1,4 @@
-import { Button, Fab, Grid, Grid2, TextField } from '@mui/material'
+import { Button, Fab, Grid2, TextField } from '@mui/material'
 import './styles.css'
 import { useState } from 'react'
 import { OrdersRespository } from '../../OrdersRepository';
@@ -16,10 +16,9 @@ export default function Home({ ordersRepository }: Props) {
     const [table, setTable] = useState(0);
     const [target, setTarget] = useState('');
     const [quantity, setQuantity] = useState(0);
-    const [order, setOrder] = useState<Order>({} as Order)
+    const [order, setOrder] = useState<Order[]>([])
 
     function handleAddOrder() {
-        setOrder(order);
         const id = uuidv4();
         const data: Order = {
             id,
@@ -27,8 +26,13 @@ export default function Home({ ordersRepository }: Props) {
             target,
             quantity
         }
-        ordersRepository.add({ ...order, ...data })
-        setAddOrder(false);
+        ordersRepository.add({ ...order, ...data });
+        setOrder(ordersRepository.getOrder());
+    }
+
+    function handleDeleteOrder(id: string){
+        ordersRepository.removeOrder(id);
+        setOrder(ordersRepository.getOrder());
     }
 
     const gridProps = {
@@ -37,6 +41,8 @@ export default function Home({ ordersRepository }: Props) {
         backgroundColor: 'var(--gray-100)',
         borderRadius: '5px',
     }
+
+    const isNotEmpty = ordersRepository.getOrder().length > 0;
 
     return (
         <div className='mainApp'>
@@ -80,16 +86,17 @@ export default function Home({ ordersRepository }: Props) {
             }
             <h1>Pedidos já feitos</h1>
             <Grid2 {...gridProps} spacing={2} container >
-            {ordersRepository.getOrder().map((order) => {
+            {isNotEmpty ?
+                ordersRepository.getOrder().map((order) => {
                 return (
-                    <div className='orderBox'>
+                    <div className='orderBox' key={order.id}>
                         <p><TableRestaurant /> M: {order.table}</p>
                         <p><Fastfood /> P: {order.target}</p>
                         <p><ShoppingCart /> Q: {order.quantity}</p>
-                        <Fab color="primary" size="small"><Delete /></Fab>
+                        <Fab color="primary" size="small" onClick={() => handleDeleteOrder(order.id)}><Delete /></Fab>
                     </div>
                 )
-            })
+            }) : <p> Não há pedidos!</p>
             }
             </Grid2>
         </div>
