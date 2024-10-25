@@ -79,7 +79,7 @@ export default function Home({ ordersRepository }: Props) {
                         <p><TableRestaurant /> M: {order.table}</p>
                         <p><Fastfood /> P: {order.target}</p>
                         <p><ShoppingCart /> Q: {order.quantity}</p>
-                        <Fab><Delete /></Fab>
+                        <Fab color="primary" size="small"><Delete /></Fab>
                     </div>
                 )
             })
