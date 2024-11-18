@@ -34,7 +34,7 @@ describe('LocalStorageAdapter', () => {
     });
 
     it('should add an order', () => {
-        const order: Order = { id: '1', table: 'Table 1', target: 'Target 1', item: 'item1', quantity: 2 };
+        const order: Order = { id: '1', table: 1, target: 'Target 1', quantity: 2 };
         adapter.add(order);
         const orders = adapter.getOrder();
         expect(orders).toHaveLength(1);
@@ -42,8 +42,8 @@ describe('LocalStorageAdapter', () => {
     });
 
     it('should get orders', () => {
-        const order1: Order = { id: '1', table: 'Table 1', target: 'Target 1', item: 'item1', quantity: 2 };
-        const order2: Order = { id: '2', table: 'Table 2', target: 'Target 2', item: 'item2', quantity: 3 };
+        const order1: Order = { id: '1', table: 1, target: 'Target 1', quantity: 2 };
+        const order2: Order = { id: '2', table: 2, target: 'Target 2', quantity: 3 };
         
         adapter.add(order1);
         adapter.add(order2);
@@ -54,10 +54,10 @@ describe('LocalStorageAdapter', () => {
     });
 
     it('should update an order', () => {
-        const order: Order = { id: '1', table: 'Table 1', target: 'Target 1', item: 'item1', quantity: 2 };
+        const order: Order = { id: '1', table: 1, target: 'Target 1', quantity: 2 };
         adapter.add(order);
 
-        const updatedOrder: Order = { id: '1', table: 'Table 1', target: 'Target 1', item: 'item1', quantity: 5 };
+        const updatedOrder: Order = { id: '1', table: 1, target: 'Target 1', quantity: 5 };
         adapter.updateOrder(updatedOrder);
         
         const orders = adapter.getOrder();
@@ -65,8 +65,8 @@ describe('LocalStorageAdapter', () => {
     });
 
     it('should remove an order', () => {
-        const order1: Order = { id: '1', table: 'Table 1', target: 'Target 1', item: 'item1', quantity: 2 };
-        const order2: Order = { id: '2', table: 'Table 2', target: 'Target 2', item: 'item2', quantity: 3 };
+        const order1: Order = { id: '1', table: 1, target: 'Target 1', quantity: 2 };
+        const order2: Order = { id: '2', table: 2, target: 'Target 2', quantity: 3 };
         
         adapter.add(order1);
         adapter.add(order2);
@@ -78,7 +78,7 @@ describe('LocalStorageAdapter', () => {
     });
 
     it('should not remove an order that does not exist', () => {
-        const order: Order = { id: '1', table: 'Table 1', target: 'Target 1', item: 'item1', quantity: 2 };
+        const order: Order = { id: '1', table: 1, target: 'Target 1', quantity: 2 };
         adapter.add(order);
         adapter.removeOrder('2'); // Tentando remover um ID que não existe
 
