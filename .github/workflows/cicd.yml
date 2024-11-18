@@ -1,0 +1,38 @@
+name: npm CI with vitest
+
+on:
+  push:
+    branches: [ "main", "test" ]
+  pull_request:
+    branches: [ "main", "test" ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests with vitest
+        run: | 
+          npm install node-localstorage
+          npm install -g bun
+          bun run test
+
+      - name: Upload Test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-testes
+          path: ./coverage/*
